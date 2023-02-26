@@ -1,0 +1,558 @@
+@font-face {
+    font-family: "Open Sans";
+    src: url("fonts//OpenSans-Italic.woff2") format("woff2"),
+        url("fonts//OpenSans-Italic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("/fonts/OpenSans-Regular.woff2") format("woff2"),
+        url("/fonts/OpenSans-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-red: #bc0a0a;
+    --color-light-red: #f86969;
+    --color-yellow: #ffff00;
+    --color--light-yellow: #fafab8;
+    --color-blue: #0000ff;
+    --color-light-blue: #34adf8;
+    --color-cyan: #00ffff;
+    --color-green: #008000;
+    --color-light-green: #60fa45;
+    --color-brown: #3c3013;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    line-height: 100%;
+    color: var(--color-black);
+    background-color: var(--color--light-yellow);
+}
+
+.visually-hidden {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden; 
+}
+
+.container {
+    min-width: 320px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      min-width: 768px;
+      padding: 0 30px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .container {
+      min-width: 1440px;
+      padding: 0 110px;
+      margin: 0 auto;
+    }
+  }
+
+.table-section__title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    line-height: 100%;
+    font-weight: bold;
+    margin: 5px auto;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-blue);
+  }
+
+  @media(min-width: 768px) {
+    .table-section__title {
+        font-size: 34px;
+        margin: 10px auto;
+        color: var(--color-red);
+    }
+  }
+  
+  @media(min-width: 1440px) {
+    .table-section__title {
+        font-size: 46px;
+        margin: 15px auto;
+        color: var(--color-green);
+        position: relative;
+    }
+
+    .table-section__title::before {
+        position: absolute;
+        content: " ";
+        width: 128px;
+        height: 90px;
+        top: -15px;
+        left: 0;
+        background-image: url("/img/car.svg");
+        background-repeat: no-repeat;
+        background-color: transparent;
+        animation: car_start 0.5s linear 3s, car_move 1s ease-in 3.5s forwards;
+    }
+    /* Анимация автомобиля*/
+    @keyframes car_start {
+        100%{
+            transform: translateY(-1px);
+        }
+        50%{
+            transform: translateY(1px);
+        }
+        0%{
+            transform: translateY(-1px);
+        }
+    }
+    
+    @keyframes car_move {
+        100%{
+            transform: translateX(23vw);
+        }
+        50%{
+            transform: translateX(1vw);
+        }
+        0%{
+            transform: translateX(0vw);
+        }
+    }
+} 
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+/*Счётчик строк в таблице*/
+.table__body {
+    counter-reset: counter-row;
+}
+
+.table__row {
+    counter-increment: counter-row;
+    
+}
+
+.table__column--number {
+    position: relative;
+}
+
+.table__column--number:before {
+    content: counter(counter-row);
+}
+
+.table__row:first-of-type .table__column--number::after {
+    position: absolute;
+    content: " ";
+    width: 26px;
+    width: 100%;
+    height: 30px;
+    top: 20%;
+    left: calc(50% - ((26px + (64 - 26) * ((100vw - 320px) / (1920 - 320)))/2));    
+    background-image: url(/img/medal.svg);
+    background-repeat: no-repeat;
+    background-size:contain;
+    z-index: 1;
+}
+
+.table__row:first-of-type .table__column--shine::after {
+    position: absolute;
+    content: " ";
+    filter: blur(2px);
+    top: 35%;
+    left: 25%;
+    width: 50%;
+    height: 60%;
+    color: transparent;
+    mix-blend-mode: screen;
+    background-image: repeating-linear-gradient(60deg, transparent, transparent 1em, var(--color-yellow) 50%);
+    background-size: 2em 2em;
+    z-index: 2;
+    animation: shine 8s linear infinite;
+}
+/*Анимация блеска медали*/
+@keyframes shine {
+    0% {
+		background-position: -50% 50%;
+	}
+	50% {
+		background-position: 150% 50%;
+	}
+	100% {
+        background-position: -50% 50%;
+    }
+}
+
+    @media(min-width: 768px) {
+        .table__row:first-of-type .table__column--number::after {
+            position: absolute;
+            content: " ";
+            height: 40px;
+            top: 20%;
+            background-image: url(/img/medal.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+
+    @media(min-width: 1440px) {
+        .table__row:first-of-type .table__column--number::after {
+            position: absolute;
+            content: " ";
+            width: 64px;
+            height: 50px;
+            top: 10%;
+            left: calc(50% - 27px);
+            background-image: url(/img/medal.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            padding: 0;
+        }
+    }
+
+.table__column:nth-child(1) {
+    width: 2%;
+    padding: 10px;
+}
+
+.table__column:nth-child(2) {
+    width: 30%;
+    word-wrap: break-word;
+    padding: 5px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.table__column:nth-child(3) {
+    display: none;
+    width: 12%;
+    padding: 5px;
+}
+
+.table__column:nth-child(4) {
+    display: none;
+    width: 12%;
+    padding: 5px;
+}
+
+.table__column:last-child {
+    width: 15%;
+}
+
+    @media(min-width: 768px) {
+        .table__column:nth-child(2) {
+            width: 20%;       
+        } 
+    }
+
+    @media(min-width: 1440px) {
+        .table__column:nth-child(1) {
+            width: 4%;
+            padding: 10px;
+        }
+
+        .table__column:nth-child(2) {
+            width: 15%;
+            word-wrap: break-word;
+            padding: 10px;
+            padding-left: 20px;
+        }
+
+        .table__column:nth-child(3) {
+            display: table-cell;
+            width: 12%;
+            padding: 10px;
+        }
+
+        .table__column:nth-child(4) {
+            display: table-cell;
+            width: 12%;
+            padding: 10px;
+        }
+    }
+
+.table__row:hover {
+    background-color: var(--color-light-blue);
+}  
+
+.table__row--caption {
+    border-bottom: 3px solid var(--color-blue);
+}
+
+.table__column {
+    height: 30px;
+    font-size: 12px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.table__column--caption {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    line-height: 80%;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table__row:first-of-type .table__column {
+    width: 100%;
+    color: transparent;
+    background-image: linear-gradient(90deg, var(--color-black), var(--color-red), var(--color-blue), var(--color-green),  var(--color-cyan), var(--color-yellow), var(--color-black));
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 300px 300px;
+    background-position: 0 0;
+    animation: wave 4s infinite linear;
+}
+/*Анимация волны строки*/  
+@keyframes wave {
+    from {
+      background-position-x: 0px;
+    }
+    to {
+      background-position-x: 300px;
+    }
+}
+
+    @media (min-width: 768px) {
+        .table__row:hover {
+            background-color: var(--color-light-red);
+        }
+
+        .table__row--caption {
+            border-bottom: 3px solid var(--color-red);
+        }
+
+        .table__column {
+            height: 40px;
+            font-size: 14px;
+        }
+
+        .table__column--caption {
+            font-size: 16px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .table__row:hover {
+            background-color: var(--color-light-green);
+        }
+
+        .table__row--caption {
+            border-bottom: 3px solid var(--color-green);
+        }
+
+        .table__column {
+            font-size: 16px;
+        }
+
+        .table__column--caption {
+            font-size: 22px;
+        }
+    }
+
+.results {
+    text-align: center;
+    padding: 5px;
+}
+
+    @media (min-width: 1440px) {
+        .results {
+            padding: 10px;
+        }
+    }
+
+.button--vertical {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.button__result {
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 30px;
+    border: none;
+    background-color: transparent;
+    font-family: "Open Sans", sans-serif;
+    font-size: 10px;
+    line-height: 100%;
+    font-weight: normal;
+    font-style: italic; 
+    vertical-align: middle;
+    padding: 3px;
+}
+
+.button__result:hover {
+    color: var(--color-brown);
+    box-sizing: border-box;    
+    background-color: transparent;
+    box-shadow: 0 0 0 1px var(--color-blue);
+    border-radius: 5px;
+    outline: none;
+}
+
+.button__result:focus {
+    font-weight: bold;
+    background-color: var(--color-white);
+    box-shadow: inset 0 0 0 1px var(--color-blue);
+    border-radius: 5px;
+    outline: none;   
+}
+
+.button__total {
+    min-width: 48px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 100%;
+    vertical-align: middle;
+    border: none;
+    background-color: transparent;
+    padding: 6px;
+}
+
+.button__total:hover {
+    color: var(--color-brown);
+    box-sizing: border-box;    
+    box-shadow: 0 0 0 1px var(--color-blue);
+    border-radius: 5px;
+    outline: none;
+}
+
+.button__total:focus {
+    font-size: 14px;
+    background-color: var(--color-white);
+    box-shadow: inset 0 0 0 1px var(--color-blue);
+    border-radius: 5px; 
+    outline: none;
+    padding: 5px;
+}
+
+    @media (min-width: 768px) {
+        .button--vertical {
+            display: block;
+        }
+
+        .button__result {
+            max-width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .button__result:hover {  
+            box-shadow: 0 0 0 2px var(--color-red);
+            outline: none;
+        }
+
+        .button__result:focus {
+            box-shadow: 0 0 0 2px var(--color-red);
+        }
+
+        .button__total {
+            font-size: 16px;
+            text-transform: uppercase;
+            padding: 16px 14px;
+        }
+
+        .button__total:hover {  
+            font-size: 18px;
+            box-shadow: 0 0 0 2px var(--color-red);
+            outline: none;
+            padding: 15px;
+        }
+
+        .button__total:focus {
+            font-size: 18px;
+            box-shadow: 0 0 0 2px var(--color-red);
+            padding: 15px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .button__result {
+            font-size: 20px;
+            font-style: normal;
+        }
+
+        .button__result:hover {  
+            box-shadow: 0 0 0 3px var(--color-green);
+            outline: none;
+        }
+
+        .button__result:focus {
+            box-shadow: 0 0 0 3px var(--color-green);  
+        }
+
+        .button__total {
+            font-size: 22px;
+            padding: 20px;
+        }
+
+        .button__total:hover {  
+            font-size: 22px;
+            box-shadow: 0 0 0 3px var(--color-green);
+            outline: none;
+            padding: 20px;
+        }
+
+        .button__total:focus {
+            font-size: 22px;
+            box-shadow: 0 0 0 3px var(--color-green);
+            padding: 20px;
+        }
+    }
+
+.table__column--number {
+    text-align: center;
+    padding: 5px;
+}
+
+.table__column--result,
+.table__column--total {
+    text-align: center;
+}
+
+    @media (min-width: 1440px) {
+        .table__column--city,
+        .table__column--car {
+            font-style: italic;
+            font-weight: bold;
+            line-height: 100%;
+        }
+    }
