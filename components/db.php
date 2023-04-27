@@ -37,9 +37,22 @@ array_walk_recursive($attempts, function ( $value, $key) use (&$ids)  {
     }
 });
 
-print_r(array_filter($ids, function($v) {
+/*print_r(array_filter($ids, function($v) {
   return $v == 1;
-}));
+}));*/
 
+$res = [];
+function getId ($arrays, $key, $value, $result) {
+  foreach ($arrays as $array) {
+    
+  if ($array[$key] == $value && in_array($result, $array)) {
+    $res[$key] = $value;
+    $arr[] = $array[$result];
+    print_r($arr);
+   // $res[$result] = array_values($array);
+  }
+};
+  return $res;
+};
 
-  
+print_r(getId($attempts, 'id', '1', 'result'));
