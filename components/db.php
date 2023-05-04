@@ -41,18 +41,45 @@ array_walk_recursive($attempts, function ( $value, $key) use (&$ids)  {
   return $v == 1;
 }));*/
 
-$res = [];
-function getId ($arrays, $key, $value, $result) {
-  foreach ($arrays as $array) {
-    
-  if ($array[$key] == $value && in_array($result, $array)) {
-    $res[$key] = $value;
-    $arr[] = $array[$result];
-    print_r($arr);
-   // $res[$result] = array_values($array);
-  }
-};
-  return $res;
+
+function id($key) {
+  
+ /* for ($el = 1; $el <= 15; $el ++) {
+    $value [$key] = $el;
+    //return $value;
+  };//print_r($value);
+  return $value [$key];*/
+  return $key;
 };
 
-print_r(getId($attempts, 'id', '1', 'result'));
+var_dump(id('id'));
+$arr_key = [];
+$arr = []; 
+$res = [];
+function getId ($arrays, $key, $result) {
+  print_r(array_column($arrays, $key));
+  foreach ($arrays as $array) {
+     //$arr_key [] = $array[$key];
+     
+     //sort($arr_key);
+  if ($array[$key] == id('id') && array_key_exists($result, $array)) {
+    $res[$key] = id('id');
+    $results [] = $array[$result];
+
+     
+   $res['result'] = $results;
+   
+  }; 
+};
+  return $array;
+};
+//var_dump(array_push($arr , $res ));
+print_r(getId($attempts, 'id', 'result'));
+
+/*for ($i = 1; $i<= 15; $i++) {
+  if (array_key_exists('id', $attempts) == $i) {
+      $arr[] = (array_key_exists('id', $attempts));
+  };
+var_dump($arr);
+};*/
+
