@@ -9,77 +9,20 @@ function get_decoding($json) {
 
 $race_participants =  get_decoding('data_cars.json');
 $attempts = get_decoding('data_attempts.json');
-//var_dump($race_participants);
-var_dump($attempts);
-
-/*function id($el) {
-  return $el['id'];
-}
-
-$ar_uniq = array_map('id', $attempts);
-$ar_uniq = array_unique($ar_uniq);
-
-foreach( $ar_uniq as $key => $value ):
-  $ms = $value;
-  $new = array_filter( $attempts, function($ar) use ($ms) 
-  {
-    foreach( $ar as $key => $value ):
-      return($v == $ms);
-    endforeach;
-  }
-);
-  print_r($new);
-endforeach;*/
-$ids = [];
-array_walk_recursive($attempts, function ( $value, $key) use (&$ids)  {
-    if ( $key == "id" )    {
-        $ids[] = $value;
-    }
-});
-
-/*print_r(array_filter($ids, function($v) {
-  return $v == 1;
-}));*/
-
-
-function id($key) {
-  
- /* for ($el = 1; $el <= 15; $el ++) {
-    $value [$key] = $el;
-    //return $value;
-  };//print_r($value);
-  return $value [$key];*/
-  return $key;
+$max_count = 0;
+foreach ($attempts as $attempt) {
+  $sort_attempts[$attempt['id']]['id'] = $attempt['id'];
+  $sort_attempts[$attempt['id']]['results'][] = $attempt['result'];
+  if (count($sort_attempts[$attempt['id']]['results']) > $max_count) {
+    $max_count = count($sort_attempts[$attempt['id']]['results']); 
+   };
 };
-
-var_dump(id('id'));
-$arr_key = [];
-$arr = []; 
-$res = [];
-function getId ($arrays, $key, $result) {
-  print_r(array_column($arrays, $key));
-  foreach ($arrays as $array) {
-     //$arr_key [] = $array[$key];
-     
-     //sort($arr_key);
-  if ($array[$key] == id('id') && array_key_exists($result, $array)) {
-    $res[$key] = id('id');
-    $results [] = $array[$result];
-
-     
-   $res['result'] = $results;
-   
-  }; 
-};
-  return $array;
-};
-//var_dump(array_push($arr , $res ));
-print_r(getId($attempts, 'id', 'result'));
-
-/*for ($i = 1; $i<= 15; $i++) {
-  if (array_key_exists('id', $attempts) == $i) {
-      $arr[] = (array_key_exists('id', $attempts));
+//$sort_attempts = array_column($sort_attempts, null, 'id');
+$dash = '<span style="font-weight: bold">-</span>';
+foreach ($race_participants as &$race_participant) {
+  $race_participant += $sort_attempts[$race_participant['id']];
+  if (count($race_participant['results']) < $max_count) {
+    array_push($race_participant['results'], $dash);
   };
-var_dump($arr);
-};*/
-
+  $race_participant['total'] = array_sum($race_participant['results']); 
+};

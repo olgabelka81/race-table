@@ -6,8 +6,9 @@ const resultButtons = document.querySelectorAll('.button');
 const getSortValues = (index) => {
     const sortedRows = Array.from(table.rows)
     .slice(1)
-    .sort((rowA, rowB) => rowB.cells[index].innerHTML - rowA.cells[index].innerHTML);
+    .sort((rowA, rowB) => rowB.cells[index].innerHTML.replace(/[^0-9\.]+/g, "") - rowA.cells[index].innerHTML.replace(/[^0-9\.]+/g, ""));
     table.append(...sortedRows);
+    console.log(sortedRows);
 };
 
 //Функция сортировки итогового столбца
@@ -18,7 +19,7 @@ const onClickButton = () => {
     const arrayButtons = Array.from(resultButtons);
     for (let i = 0; i < arrayButtons.length; i++) {
         arrayButtons[i].addEventListener('click', () => {
-            getSortValues(i + (arrayButtons.length - 1));
+            getSortValues(i + numberOfColumn.length - arrayButtons.length);
         });
     };
 };
