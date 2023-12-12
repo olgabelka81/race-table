@@ -189,10 +189,11 @@ body {
     position: absolute;
     content: " ";
     filter: blur(2px);
-    top: 35%;
-    left: 25%;
-    width: 50%;
-    height: 60%;
+    top: 40%;
+    left: 15%;
+    width: 60%;
+    height: 40%;
+    border-radius: 50%;
     color: transparent;
     mix-blend-mode: screen;
     background-image: repeating-linear-gradient(60deg, transparent, transparent 1em, var(--color-yellow) 50%);
@@ -223,6 +224,11 @@ body {
             background-repeat: no-repeat;
             background-size: contain;
         }
+
+        .table__row:first-of-type .table__column--shine::after {
+            left: 19%;
+            height: 35%;
+        }
     }
 
     @media(min-width: 1440px) {
@@ -237,6 +243,12 @@ body {
             background-repeat: no-repeat;
             background-size: contain;
             padding: 0;
+        }
+
+        .table__row:first-of-type .table__column--shine::after {
+            left: 28%;
+            width: 39%;
+            height: 50%;
         }
     }
 
